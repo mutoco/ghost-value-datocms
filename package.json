@@ -1,10 +1,10 @@
 {
   "name": "datocms-plugin-ghost-value",
-  "description": "A DatoCMS plugin that provides ghost values for fields",
-  "homepage": "https://github.com/<USER>/<REPO>",
+  "description": "A simple DatoCMS field extension for Single-line String fields that displays the value of another Single-line String field in the same record as a placeholder.",
+  "homepage": "https://github.com/mutoco/ghost-value-datocms",
   "private": false,
   "version": "0.1.0",
-  "author": "<YOUR-NAME> <<YOUR-EMAIL>>",
+  "author": "mutoco <hello@mutoco.ch>",
   "type": "module",
   "keywords": [
     "datocms-plugin"

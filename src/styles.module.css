@@ -1,3 +1,29 @@
 .inspector {
   margin-top: var(--spacing-l);
 }
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--input-border, #e0e0e0);
+  box-sizing: border-box;
+  font-weight: 300;
+  font-size: 13.5px;
+  color: inherit;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.input:hover {
+  border-color: var(--input-border-hover, #c7c7c7);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--input-border-focus, #282828);
+  box-shadow: 0 0 0 2px rgba(38, 132, 255, 0.15);
+}
+
+.input:disabled {
+  background: #f7f7f7;
+  cursor: not-allowed;
+}

@@ -1,7 +1,9 @@
 import { connect } from "datocms-plugin-sdk";
+import type { CSSProperties } from "react";
 import "datocms-react-ui/styles.css";
 import ConfigScreen from "./entrypoints/ConfigScreen";
 import { render } from "./utils/render";
+import styles from "./styles.module.css";
 
 function getByPath(obj: any, path: string) {
 	if (!obj || !path) return undefined;
@@ -33,12 +35,14 @@ function GhostValueFieldExtension({ ctx }: { ctx: any }) {
 				placeholder={placeholderValue}
 				disabled={ctx.disabled}
 				onChange={(e) => ctx.setFieldValue(ctx.fieldPath, e.target.value)}
-				style={{
-					width: "100%",
-					padding: "10px",
-					border: "1px solid #e0e0e0",
-					boxSizing: "border-box",
-				}}
+				className={styles.input}
+				style={
+					{
+						"--input-border": "#e0e0e0",
+						"--input-border-hover": "#c7c7c7",
+						"--input-border-focus": "#282828",
+					} as CSSProperties
+				}
 			/>
 		</div>
 	);
@@ -49,35 +53,31 @@ function GhostValueConfigScreen({ ctx }: { ctx: any }) {
 	const error = ctx.errors?.sourceFieldApiKey as string | undefined;
 
 	return (
-		<div style={{ padding: 16, fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, sans-serif" }}>
-			<h2 style={{ margin: "0 0 8px 0" }}>Ghost Value</h2>
-			<p style={{ margin: "0 0 16px 0", color: "#555" }}>
-				Set the API key of the Single-line String field whose value should be used as the placeholder.
-			</p>
-
-			<label style={{ display: "block", fontWeight: 600, marginBottom: 6 }}>
-				Source field API key
+		<div style={{ padding: 10, fontFamily: "colfax-web, Roboto, \"Helvetica Neue\", Helvetica, Roboto, Arial, sans-serif" }}>
+			<label style={{ display: "block", fontWeight: 400, fontSize: 13.5, marginBottom: 6.4, color: "#3a3436" }}>
+				Source field ID
 			</label>
 
 			<input
 				type="text"
 				value={sourceFieldApiKey}
 				onChange={(e) => ctx.setParameters({ sourceFieldApiKey: e.target.value })}
-				placeholder="e.g. title"
-				style={{
-					width: "100%",
-					padding: "8px",
-					border: error ? "1px solid #d92d20" : "1px solid #e0e0e0",
-					borderRadius: "6px",
-					boxSizing: "border-box",
-				}}
+				placeholder="navigation_title"
+				className={styles.input}
+				style={
+					{
+						"--input-border": error ? "#d92d20" : "#f0f0f0",
+						"--input-border-hover": error ? "#d92d20" : "#c7c7c7",
+						"--input-border-focus": error ? "#d92d20" : "#282828",
+					} as CSSProperties
+				}
 			/>
 
 			{error ? (
 				<p style={{ marginTop: 8, color: "#d92d20", fontSize: 12 }}>{error}</p>
 			) : (
 				<p style={{ marginTop: 8, color: "#666", fontSize: 12 }}>
-					This must be a field API key on the same model (same record).
+					This must be a field ID on the same record
 				</p>
 			)}
 		</div>
@@ -96,7 +96,7 @@ connect({
 				name: "Ghost Value",
 				type: "editor",
 				fieldTypes: ["string"],
-				configurable: { initialHeight: 220 },
+				configurable: { initialHeight: 80 },
 				initialHeight: 60,
 			},
 		];
@@ -113,12 +113,12 @@ connect({
 		const sourceFieldApiKey = parameters?.sourceFieldApiKey;
 
 		if (!sourceFieldApiKey || typeof sourceFieldApiKey !== "string" || !sourceFieldApiKey.trim()) {
-			return { sourceFieldApiKey: "Please provide a source field API key." };
+			return { sourceFieldApiKey: "Please provide a source field ID." };
 		}
 
 		// Basic safety check: API keys are usually snake_case
 		if (!/^[a-z0-9_]+$/.test(sourceFieldApiKey)) {
-			return { sourceFieldApiKey: "This does not look like a valid field API key (expected lowercase letters, numbers, underscores)." };
+			return { sourceFieldApiKey: "This does not look like a valid field ID (expected lowercase letters, numbers, underscores)." };
 		}
 
 		return {};
