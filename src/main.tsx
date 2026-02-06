@@ -28,7 +28,7 @@ function GhostValueFieldExtension({ ctx }: { ctx: any }) {
 	const placeholderValue = coerceLocalizedValue(rawPlaceholderValue, ctx.locale);
 
 	return (
-		<div className="form__field">
+		<div className="form__field" style={{ padding: 10 }}>
 			<input
 				type="text"
 				value={currentValue}

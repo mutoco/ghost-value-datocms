@@ -7,10 +7,14 @@
   padding: 10px;
   border: 1px solid var(--input-border, #e0e0e0);
   box-sizing: border-box;
-  font-weight: 300;
-  font-size: 13.5px;
-  color: inherit;
+  font-weight: 400;
+  font-size: 14.0625px;
+  color: #34363A;
+  line-height: 21.0938px;
   transition: border-color 120ms ease, box-shadow 120ms ease;
+  letter-spacing: normal;
+  font-stretch: 100%;
+  font-family: colfax-web, Roboto, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 
 .input:hover {
@@ -20,10 +24,22 @@
 .input:focus {
   outline: none;
   border-color: var(--input-border-focus, #282828);
-  box-shadow: 0 0 0 2px rgba(38, 132, 255, 0.15);
+  box-shadow: 0 0 0 3px #41414123;
 }
 
 .input:disabled {
   background: #f7f7f7;
   cursor: not-allowed;
+}
+
+.input::placeholder {
+  color: #b4b4b4;
+  font-size: 14.0625px;
+  letter-spacing: 0.03em;
+  letter-spacing: normal;
+  font-stretch: 100%;
+  font-weight: 400;
+  font-size: 14.0625px;
+  line-height: 21.0938px;
+  font-family: colfax-web, Roboto, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
