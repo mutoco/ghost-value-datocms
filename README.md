@@ -1,6 +1,6 @@
 # Ghost Value — DatoCMS Plugin
 
-**Ghost Value** is a simple DatoCMS field extension for **Single-line String fields** that displays the value of another Single-line String field in the same record as a placeholder.
+**Ghost Value** is a simple DatoCMS field extension for **Single-line/Textarea String fields** that displays the value of another Single-line String field in the same record as a placeholder.
 
 ## How it works
 
