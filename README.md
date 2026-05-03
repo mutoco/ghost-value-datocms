@@ -16,5 +16,5 @@
 
 ## Limitations
 
-- Works only with **Single-line String fields**
+- Works only with **Single-line and Textarea String fields**
 - The placeholder updates based on the current form state
