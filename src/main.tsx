@@ -110,8 +110,8 @@ connect({
 				name: "Ghost Value",
 				type: "editor",
 				fieldTypes: ["string", "text"],
-				configurable: { initialHeight: 80 },
-				initialHeight: 60,
+				configurable: { initialHeight: 64 },
+				initialHeight: 64,
 			},
 		];
 	},
