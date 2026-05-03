@@ -9,10 +9,7 @@ type Props = {
 export default function ConfigScreen({ ctx }: Props) {
   return (
     <Canvas ctx={ctx}>
-      <p>Welcome to your plugin! This is your config screen!</p>
-      <div className={s.inspector}>
-        <ContextInspector />
-      </div>
+      <p>This plugin offers no settings. Just add it to a text field to use it.</p>
     </Canvas>
   );
 }
