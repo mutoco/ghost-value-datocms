@@ -1,5 +1,5 @@
 import { connect } from "datocms-plugin-sdk";
-import type { CSSProperties } from "react";
+import type { ChangeEvent, CSSProperties } from "react";
 import "datocms-react-ui/styles.css";
 import ConfigScreen from "./entrypoints/ConfigScreen";
 import { render } from "./utils/render";
@@ -19,6 +19,16 @@ function coerceLocalizedValue(value: unknown, locale: string): string {
 	return "";
 }
 
+function isMultiParagraphField(ctx: any): boolean {
+	const fieldType =
+		ctx?.field?.attributes?.field_type ||
+		ctx?.field?.attributes?.fieldType ||
+		ctx?.field?.field_type ||
+		ctx?.field?.fieldType;
+
+	return fieldType === "text";
+}
+
 function GhostValueFieldExtension({ ctx }: { ctx: any }) {
 	const sourceApiKey = (ctx.parameters?.sourceFieldApiKey as string | undefined) || "";
 	const rawCurrentValue = getByPath(ctx.formValues, ctx.fieldPath);
@@ -26,24 +36,28 @@ function GhostValueFieldExtension({ ctx }: { ctx: any }) {
 
 	const rawPlaceholderValue = sourceApiKey ? getByPath(ctx.formValues, sourceApiKey) : "";
 	const placeholderValue = coerceLocalizedValue(rawPlaceholderValue, ctx.locale);
+	const renderAsTextarea = isMultiParagraphField(ctx);
+
+	const sharedInputProps = {
+		value: currentValue,
+		placeholder: placeholderValue,
+		disabled: ctx.disabled,
+		onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+			ctx.setFieldValue(ctx.fieldPath, e.target.value),
+		style: {
+			"--input-border": "#0000000d",
+			"--input-border-hover": "#c7c7c7",
+			"--input-border-focus": "#282828",
+		} as CSSProperties,
+	};
 
 	return (
 		<div className="form__field" style={{ padding: 10 }}>
-			<input
-				type="text"
-				value={currentValue}
-				placeholder={placeholderValue}
-				disabled={ctx.disabled}
-				onChange={(e) => ctx.setFieldValue(ctx.fieldPath, e.target.value)}
-				className={styles.input}
-				style={
-					{
-						"--input-border": "#e0e0e0",
-						"--input-border-hover": "#c7c7c7",
-						"--input-border-focus": "#282828",
-					} as CSSProperties
-				}
-			/>
+			{renderAsTextarea ? (
+				<textarea {...sharedInputProps} className={`${styles.input} ${styles.textarea}`} />
+			) : (
+				<input {...sharedInputProps} type="text" className={styles.input} />
+			)}
 		</div>
 	);
 }
@@ -95,7 +109,7 @@ connect({
 				id: "ghost-value",
 				name: "Ghost Value",
 				type: "editor",
-				fieldTypes: ["string"],
+				fieldTypes: ["string", "text"],
 				configurable: { initialHeight: 80 },
 				initialHeight: 60,
 			},

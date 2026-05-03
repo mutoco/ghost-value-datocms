@@ -2,37 +2,45 @@
   margin-top: var(--spacing-l);
 }
 
-.input {
+.input,
+.textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid var(--input-border, #e0e0e0);
+  border: 1px solid var(--input-border, #0000000d);
   box-sizing: border-box;
   font-weight: 400;
   font-size: 14.0625px;
-  color: #34363A;
+  color: #34363a;
   line-height: 21.0938px;
-  transition: border-color 120ms ease, box-shadow 120ms ease;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
   letter-spacing: normal;
   font-stretch: 100%;
-  font-family: colfax-web, Roboto, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family:
+    colfax-web, Roboto, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 
-.input:hover {
+.input:hover,
+.textarea:hover {
   border-color: var(--input-border-hover, #c7c7c7);
 }
 
-.input:focus {
+.input:focus,
+.textarea:focus {
   outline: none;
   border-color: var(--input-border-focus, #282828);
   box-shadow: 0 0 0 3px #41414123;
 }
 
-.input:disabled {
+.input:disabled,
+.textarea:disabled {
   background: #f7f7f7;
   cursor: not-allowed;
 }
 
-.input::placeholder {
+.input::placeholder,
+.textarea::placeholder {
   color: #b4b4b4;
   font-size: 14.0625px;
   letter-spacing: 0.03em;
@@ -41,5 +49,11 @@
   font-weight: 400;
   font-size: 14.0625px;
   line-height: 21.0938px;
-  font-family: colfax-web, Roboto, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family:
+    colfax-web, Roboto, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+}
+
+.textarea {
+  min-height: 100%;
+  resize: none;
 }
